@@ -1,0 +1,9 @@
+---
+
+- name: Deploy
+  hosts: server
+  tasks:
+    - name: Import common role
+      ansible.builtin.import_role:
+        name: common
+      when: '"common" in var_roles or "all" in var_roles'
