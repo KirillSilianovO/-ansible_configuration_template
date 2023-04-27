@@ -1,6 +1,6 @@
 ARCH_TYPE = $(shell uname -m)
 
-IMAGE_NAME = kirillsilianov/deploy-image:latest-$(ARCH_TYPE)
+IMAGE_NAME = kirillsilianov/deploy-image:$(ARCH_TYPE)-latest
 
 pull:
 	docker pull $(IMAGE_NAME)
