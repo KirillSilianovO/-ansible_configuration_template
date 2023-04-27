@@ -6,6 +6,7 @@ lint:
   stage: lint
   image: kirillsilianov/deploy-image:amd64-latest
   before_script:
+    - mkdir -p /config
     - cp ./ansible-lint.yaml /config/ansible-lint.yaml
   script:
     - ansible-lint -c /config/ansible-lint.yaml
