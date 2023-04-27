@@ -7,12 +7,12 @@ pull:
 
 lint: pull
 	docker run -it \
-	-v $(PWD)/configuration:/var/configuration/deploy \
-	-v $(PWD)/ansible-lint.yaml:/config/ansible-lint.yaml \
-	$(IMAGE_NAME) ansible-lint -c /config/ansible-lint.yaml
+	-v $(PWD)/configuration:/workdir \
+	-v $(PWD)/ansible-lint.yaml:/ansible-lint.yaml \
+	$(IMAGE_NAME) ansible-lint -c /ansible-lint.yaml
 
 run: lint
-	docker run -it -v $(PWD)/configuration:/var/configuration/deploy \
-	-v $(PWD)/entrypoint.sh:/var/entrypoint.sh \
+	docker run -it -v $(PWD)/configuration:/workdir \
+	-v $(PWD)/entrypoint.sh:/entrypoint.sh \
 	-v $(PWD)/ansible.cfg:/etc/ansible/ansible.cfg \
-	$(IMAGE_NAME) /bin/sh /var/entrypoint.sh
+	$(IMAGE_NAME) /bin/sh /entrypoint.sh
