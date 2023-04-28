@@ -1,0 +1,22 @@
+providers:
+  docker:
+    exposedByDefault: false
+api:
+  dashboard: true
+  insecure: true
+  debug: true
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+  gitSSH:
+    address: ":2225"
+certificatesResolvers:
+  letsEncryptResolver:
+    acme:
+      email: "{{ acme_email }}"
+      storage: /etc/traefik/acme.json
+      httpChallenge:
+        entryPoint: web

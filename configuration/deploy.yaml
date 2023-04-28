@@ -7,3 +7,31 @@
       ansible.builtin.import_role:
         name: common
       when: '"common" in var_roles or "all" in var_roles'
+    - name: Import Plex Server role
+      ansible.builtin.import_role:
+        name: plex
+      when: '"plex" in var_roles or "all" in var_roles'
+    - name: Import Docker role
+      ansible.builtin.import_role:
+        name: docker
+      when: '"docker" in var_roles or "all" in var_roles'
+    - name: Import Traefik role
+      ansible.builtin.import_role:
+        name: traefik
+      when: '"traefik" in var_roles or "all" in var_roles'
+    - name: Import Portainer server role
+      ansible.builtin.import_role:
+        name: portainer_server
+      when: '"portainer_server" in var_roles or "all" in var_roles'
+    - name: Import Torrent Client role
+      ansible.builtin.import_role:
+        name: torrent_client
+      when: '"torrent_client" in var_roles or "all" in var_roles'
+    - name: Import Video Downloader role
+      ansible.builtin.import_role:
+        name: video_downloader
+      when: '"video_downloader" in var_roles or "all" in var_roles'
+    - name: Import Gitlab role
+      ansible.builtin.import_role:
+        name: gitlab
+      when: '"gitlab" in var_roles or "all" in var_roles'

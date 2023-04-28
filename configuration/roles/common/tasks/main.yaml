@@ -1,5 +1,13 @@
 ---
 
-- name: Debug
-  ansible.builtin.debug:
-    msg: "Hello World"
+- name: "Packages install"
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - htop
+    - lm-sensors
+    - hddtemp
+    - ncdu
+    - ufw
+  become: true
