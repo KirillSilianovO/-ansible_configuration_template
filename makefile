@@ -1,5 +1,9 @@
 ARCH_TYPE = $(shell uname -m)
 
+ifeq ($(ARCH_TYPE),x86_64)
+	ARCH_TYPE = amd64
+endif
+
 IMAGE_NAME = kirillsilianov/deploy-image:$(ARCH_TYPE)-latest
 
 pull:
