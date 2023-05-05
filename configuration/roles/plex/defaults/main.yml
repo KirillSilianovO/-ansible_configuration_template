@@ -1,0 +1,13 @@
+---
+
+external_hdd_mount_dir: "/storage_h"
+
+plex_version: '1.32.0.6973-a787c5a8e'
+plex_image: 'lscr.io/linuxserver/plex:version-{{ plex_version }}'
+
+app_dir: "/opt/plex"
+data_dir: "{{ app_dir }}/data"
+
+plex_media_directory: "{{ external_hdd_mount_dir }}/media"
+
+plex_exposed_port: 32400

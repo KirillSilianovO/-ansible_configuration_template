@@ -1,0 +1,20 @@
+- name: Docker service enabled
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    - docker.service
+    - containerd.service
+  become: true
+  listen: docker_enabled
+
+- name: Docker service restarted
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - docker.service
+    - containerd.service
+  become: true
+  listen: docker_restarted

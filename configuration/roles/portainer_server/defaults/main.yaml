@@ -1,0 +1,7 @@
+---
+app_name: portainer
+app_version: 2.18.1
+app_image: "portainer/portainer-ce:{{ app_version }}"
+
+app_dir: "{{ apps_dir }}/portainer_server"
+app_data_dir: "{{ app_dir }}/data"

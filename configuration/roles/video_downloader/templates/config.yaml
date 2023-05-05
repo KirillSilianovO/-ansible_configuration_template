@@ -1,0 +1,19 @@
+playlists:
+  - PLzPGJsWZ0smCKupC73z7irFzcIL6d_iuS
+  - PLzPGJsWZ0smAC46Zh5QDXEPfg_m1bdetL
+  - PLzPGJsWZ0smAT6g4kzbSI18q_IwJhBwCo
+  - PLzPGJsWZ0smCUtnhIc6QLMlb_Z80OZbqg
+  - PLzPGJsWZ0smAnONlmAlAI71WGweu3zeH5
+  - PLzPGJsWZ0smAggByGkbxg87lmQmrNK1w8
+  - PLzPGJsWZ0smBsIZmcyFwAauZuumldiTaB
+skip_existing: true
+retry_failed: true
+plex_integration:
+  enabled: false
+  address: "10.0.0.25:32400"
+  token: "Gj44RUmhGxJ1zBfR-jgS"
+  section: "Видео"
+logs:
+  driver: "logtail"
+  token: "QCDaNNdtARmiCBKby6VMpMeQ"
+threads: {{ threads_count }}

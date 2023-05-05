@@ -1,0 +1,37 @@
+---
+
+- name: Directories created
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "1000"
+    group: "1000"
+    mode: "0755"
+  with_items:
+    - "{{ app_dir }}"
+    - "{{ app_data_dir }}"
+  become: true
+
+- name: Application container started
+  community.docker.docker_container:
+    name: portainer
+    image: "{{ app_image }}"
+    pull: true
+    restart_policy: unless-stopped
+    detach: true
+    restart: true
+    recreate: true
+    mounts:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: "{{ app_data_dir }}"
+        target: /data
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.portainer.rule: "Host(`{{ app_name }}.{{ host_domain }}`)"
+      traefik.http.routers.portainer.tls: "true"
+      traefik.http.routers.portainer.tls.certresolver: letsEncryptResolver
+      traefik.http.routers.portainer.entrypoints: websecure
+      traefik.http.services.portainer.loadbalancer.server.port: "9000"
