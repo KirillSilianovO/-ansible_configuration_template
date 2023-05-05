@@ -1,5 +1,17 @@
 ---
 
-- name: Debug
+- name: Debug all tags
   ansible.builtin.debug:
-    msg: "Hello World"
+    msg: "All tags"
+
+- name: Debug "first" tag
+  ansible.builtin.debug:
+    msg: "First tag"
+  tags:
+    - first
+
+- name: Debug "second" tag
+  ansible.builtin.debug:
+    msg: "Second tag"
+  tags:
+    - second
