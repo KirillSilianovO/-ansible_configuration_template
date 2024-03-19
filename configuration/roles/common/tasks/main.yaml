@@ -1,17 +1,7 @@
 ---
 
-- name: Debug all tags
-  ansible.builtin.debug:
-    msg: "All tags"
-
-- name: Debug "first" tag
-  ansible.builtin.debug:
-    msg: "First tag"
+- name: Test task
+  ansible.builtin.shell:
+    cmd: "echo {{ example }}"
   tags:
-    - first
-
-- name: Debug "second" tag
-  ansible.builtin.debug:
-    msg: "Second tag"
-  tags:
-    - second
+    - test
