@@ -1,3 +1,4 @@
 .idea/*
 configuration/extra_vars.yaml
 configuration/private_key.pem
+.variables.yaml

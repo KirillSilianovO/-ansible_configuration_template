@@ -1,0 +1,46 @@
+---
+
+version: 3
+
+includes:
+  ext_vars: "./.variables.yaml"
+
+vars:
+  PWD:
+    sh: pwd
+  DEPLOY_CONTAINER_NAME: "deploy-container"
+  DEPLOY_IMAGE_NAME: "kirillsilianov/deploy-image"
+  DEPLOY_IMAGE_VERSION: "2.1"
+  DEPLOY_IMAGE: "{{ .DEPLOY_IMAGE_NAME }}:{{ .DEPLOY_IMAGE_VERSION }}"
+
+tasks:
+  .set_private_key_mode:
+    cmd: "chmod 0600 {{ .PWD }}/configuration/private_key.pem"
+
+  .pre:
+    deps:
+      - ".set_private_key_mode"
+
+  lint:
+    cmd: |
+      docker run -it --rm \
+      -v {{ .PWD }}/configuration:/workdir \
+      -v {{ .PWD }}/ansible-lint.yaml:/ansible-lint.yaml \
+      --name {{ .DEPLOY_CONTAINER_NAME }} \
+      {{ .DEPLOY_IMAGE }} ansible-lint -c /ansible-lint.yaml
+
+  run:
+    vars:
+      TAGS: ""
+    deps:
+      - .pre
+    cmd: |
+      docker run -it --rm \
+      -v {{ .PWD }}/configuration:/workdir \
+      -v {{ .PWD }}/ansible.cfg:/etc/ansible/ansible.cfg \
+      -e SSH_HOST={{ .SSH_HOST }} \
+      -e SSH_PORT={{ .SSH_PORT }} \
+      -e SSH_USER={{ .SSH_USER }} \
+      -e SSH_BECOME_PASS={{ .SSH_BECOME_PASS }} \
+      --name {{ .DEPLOY_CONTAINER_NAME }} \
+      {{ .DEPLOY_IMAGE }} ansible-playbook /workdir/deploy.yaml -i /workdir/inventory.yaml {{ .TAGS }}

@@ -1,7 +1,8 @@
 ---
 
 - name: Test task
-  ansible.builtin.shell:
+  ansible.builtin.command:
     cmd: "echo {{ example }}"
+  changed_when: false
   tags:
     - test

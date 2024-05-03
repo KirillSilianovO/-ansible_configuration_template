@@ -1,0 +1,10 @@
+---
+
+version: 3
+
+vars:
+  SSH_HOST: ""
+  SSH_PORT: ""
+  SSH_USER: ""
+  SSH_BECOME_PASS: ""
+  SSH_PUBLIC_KEY: ""

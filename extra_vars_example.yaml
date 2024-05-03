@@ -1,4 +1,0 @@
-var_ssh_host: ""
-var_ssh_port: ""
-var_ssh_user: ""
-var_become_pass: ""
