@@ -17,9 +17,13 @@ tasks:
   .set_private_key_mode:
     cmd: "chmod 0600 {{ .PWD }}/configuration/private_key.pem"
 
+  .set_execution_script_mode:
+    cmd: "chmod +x {{ .PWD }}/configuration/run.sh"
+
   .pre:
     deps:
       - ".set_private_key_mode"
+      - ".set_execution_script_mode"
 
   lint:
     cmd: |
@@ -42,5 +46,6 @@ tasks:
       -e SSH_PORT={{ .SSH_PORT }} \
       -e SSH_USER={{ .SSH_USER }} \
       -e SSH_BECOME_PASS={{ .SSH_BECOME_PASS }} \
+      -e TAGS={{ .TAGS }} \
       --name {{ .DEPLOY_CONTAINER_NAME }} \
-      {{ .DEPLOY_IMAGE }} ansible-playbook /workdir/deploy.yaml -i /workdir/inventory.yaml {{ .TAGS }}
+      {{ .DEPLOY_IMAGE }} sh ./run.sh
